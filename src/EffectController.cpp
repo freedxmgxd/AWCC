@@ -59,6 +59,7 @@ void EffectController::StaticColor(uint32_t color) {
     }
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -76,6 +77,7 @@ void EffectController::Breathe(uint32_t color) {
     }
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -96,6 +98,7 @@ void EffectController::Spectrum(uint16_t duration) {
     }
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -116,6 +119,7 @@ void EffectController::Wave(uint32_t color) {
 
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -147,6 +151,7 @@ void EffectController::Rainbow(uint16_t duration) {
 
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -179,6 +184,7 @@ void EffectController::BackAndForth(uint32_t color) {
 
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
@@ -193,6 +199,7 @@ void EffectController::DefaultBlue() {
     }
     m_lightfx.SendAnimationConfigSave(0x0061);
     m_lightfx.SendAnimationSetDefault(0x0061);
+    m_lightfx.SendAnimationPlay(0x0061);
     m_lightfx.deviceRelease();
 }
 
