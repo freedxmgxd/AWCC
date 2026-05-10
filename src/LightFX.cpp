@@ -1,10 +1,8 @@
 #include "LightFX.h"
 #include <algorithm>
 #include <array>
-#include <chrono>
 #include <cstring>
 #include <loguru.hpp>
-#include <thread>
 #include <vector>
 
 LightFX::LightFX() { LOG_S(INFO) << "LightFX Module initialized"; }
@@ -67,38 +65,17 @@ void LightFX::deviceAcquire() {
     }
     if (m_deviceAcquired)
         return;
-    
-    // Enable auto-detach of kernel driver
-    libusb_set_auto_detach_kernel_driver(m_deviceHandle, 1);
-    
-    // Attempt to detach kernel driver if active
-    if (libusb_kernel_driver_active(m_deviceHandle, 0) != 0) {
+    if (libusb_kernel_driver_active(m_deviceHandle, 0) != 0)
         if (libusb_detach_kernel_driver(m_deviceHandle, 0) != 0) {
-            LOG_S(WARNING) << "Failed to detach kernel driver, attempting claim anyway";
-        }
-    }
-    
-    // Retry claim with exponential backoff
-    int maxRetries = 3;
-    for (int retry = 0; retry < maxRetries; ++retry) {
-        int claimResult = libusb_claim_interface(m_deviceHandle, 0);
-        if (claimResult == 0) {
-            m_deviceAcquired = true;
-            LOG_S(INFO) << "Device interface claimed successfully";
+            LOG_S(ERROR) << "Please detach kernel driver";
             return;
         }
-        
-        if (retry < maxRetries - 1) {
-            LOG_S(WARNING) << "Claim interface attempt " << (retry + 1) 
-                          << " failed: " << libusb_error_name(claimResult)
-                          << ", retrying...";
-            // Wait a bit before retry (exponential backoff: 10ms, 50ms, 100ms)
-            std::this_thread::sleep_for(std::chrono::milliseconds(10 * (retry + 1)));
-        } else {
-            LOG_S(ERROR) << "Cannot claim interface after " << maxRetries 
-                        << " attempts: " << libusb_error_name(claimResult);
-        }
+    if (libusb_claim_interface(m_deviceHandle, 0) != 0) {
+        LOG_S(ERROR) << "Cannot claim interface";
+        return;
     }
+    m_deviceAcquired = true;
+    // LOG_S(INFO) << "Device Acquired";
 }
 
 void LightFX::deviceRelease() {
