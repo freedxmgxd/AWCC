@@ -235,6 +235,7 @@ void LightFX::SendAnimationRemove(uint16_t animationId) {
 }
 
 void LightFX::SendAnimationPlay(uint16_t animationId) {
+    LOG(INFO) << "Sending animation play command for animation ID: 0x" << std::hex << animationId << std::dec;
     std::array<uint8_t, 6> packet{
         m_preamble,
         m_animation,
