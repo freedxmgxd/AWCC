@@ -1,6 +1,7 @@
 #include "LightFX.h"
 #include <algorithm>
 #include <array>
+#include <cstdio>
 #include <cstring>
 #include <loguru.hpp>
 #include <vector>
@@ -113,6 +114,15 @@ void LightFX::m_deviceSend(std::span<const uint8_t> data) {
     std::array<uint8_t, 33> buffer{};
     std::memcpy(buffer.data(), data.data(),
                 std::min<size_t>(data.size(), buffer.size()));
+    
+    std::string hexDump;
+    for (size_t i = 0; i < buffer.size(); i++) {
+        char hex[4];
+        snprintf(hex, sizeof(hex), "%02x", buffer[i]);
+        hexDump += hex;
+        if ((i + 1) % 8 == 0) hexDump += " ";
+    }
+    LOG_S(INFO) << "Sending USB packet (33 bytes): " << hexDump;
 
     int ret = libusb_control_transfer(
         m_deviceHandle, 0x21, 9, 0x202, 0,
@@ -122,15 +132,13 @@ void LightFX::m_deviceSend(std::span<const uint8_t> data) {
 
     if (ret != 33) {
         if (ret < 0) {
-            LOG_S(ERROR) << "Couldn't write full packet, "
-                            "libusb_control_transfer returned error: "
-                         << libusb_error_name(ret) << " (" << ret << ")";
+            LOG_S(ERROR) << "USB transfer FAILED: " << libusb_error_name(ret) << " (" << ret << ")";
         } else {
-            LOG_S(ERROR) << "Couldn't write full packet, only wrote " << ret
-                         << " bytes";
+            LOG_S(ERROR) << "USB transfer incomplete: " << ret << "/33 bytes sent";
         }
         return;
     }
+    LOG_S(INFO) << "USB transfer SUCCESS: 33 bytes sent";
 }
 
 void LightFX::m_deviceReceive(std::span<uint8_t> out) {

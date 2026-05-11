@@ -315,7 +315,8 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, testMode);
-        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        int gateResult = acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        LOG_S(INFO) << "ACPI Lighting Gate 0x25 result: 0x" << std::hex << gateResult << std::dec << " (" << gateResult << ")";
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
@@ -346,7 +347,8 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, true);
-        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        int gateResult = acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        LOG_S(INFO) << "ACPI Lighting Gate 0x25 result: 0x" << std::hex << gateResult << std::dec << " (" << gateResult << ")";
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
@@ -378,7 +380,8 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, testMode);
-        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        int gateResult = acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
+        LOG_S(INFO) << "ACPI Lighting Gate 0x25 result: 0x" << std::hex << gateResult << std::dec << " (" << gateResult << ")";
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
