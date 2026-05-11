@@ -50,24 +50,24 @@ int EffectController::getBrightness() {
 
 void EffectController::StaticColor(uint32_t color) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
     for (uint8_t zoneId : m_zoneAll) {
         std::vector<uint8_t> zone = {zoneId};
         m_lightfx.SendZoneSelect(1, std::span<const uint8_t>(zone));
         m_lightfx.SendAddAction(m_actionColor, 1, 2, color);
     }
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::Breathe(uint32_t color) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
     for (uint8_t zoneId : m_zoneAll) {
         std::vector<uint8_t> zone = {zoneId};
         m_lightfx.SendZoneSelect(1, std::span<const uint8_t>(zone));
@@ -76,17 +76,17 @@ void EffectController::Breathe(uint32_t color) {
         m_lightfx.SendAddAction(m_actionMorph, 500, 64, 0);
         m_lightfx.SendAddAction(m_actionMorph, 2000, 64, 0);
     }
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::Spectrum(uint16_t duration) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
     for (uint8_t zoneId : m_zoneAll) {
         std::vector<uint8_t> zone = {zoneId};
         m_lightfx.SendZoneSelect(1, std::span<const uint8_t>(zone));
@@ -98,17 +98,17 @@ void EffectController::Spectrum(uint16_t duration) {
         m_lightfx.SendAddAction(m_actionMorph, duration, 64, 0x0000FF);
         m_lightfx.SendAddAction(m_actionMorph, duration, 64, 0x800080);
     }
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::Wave(uint32_t color) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
 
     const size_t n = m_zoneAll.size();
     for (size_t i = 0; i < n; ++i) {
@@ -120,17 +120,17 @@ void EffectController::Wave(uint32_t color) {
         }
     }
 
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::Rainbow(uint16_t duration) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
 
     const std::array<uint32_t, 7> colors = {
         0xFF0000, // Red
@@ -153,17 +153,17 @@ void EffectController::Rainbow(uint16_t duration) {
         }
     }
 
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::BackAndForth(uint32_t color) {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
 
     const size_t n = m_zoneAll.size();
     if (n > 1) {
@@ -187,26 +187,26 @@ void EffectController::BackAndForth(uint32_t color) {
         return;
     }
 
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
 void EffectController::DefaultBlue() {
     m_lightfx.deviceAcquire();
-    m_lightfx.SendAnimationRemove(0x0061);
-    m_lightfx.SendAnimationConfigStart(0x0061);
+    m_lightfx.SendAnimationRemove(0x0000);
+    m_lightfx.SendAnimationConfigStart(0x0000);
     for (uint8_t zoneId : m_zoneAll) {
         std::vector<uint8_t> zone = {zoneId};
         m_lightfx.SendZoneSelect(1, std::span<const uint8_t>(zone));
         m_lightfx.SendAddAction(m_actionColor, 2000, 250, 0x00FFFF);
     }
-    m_lightfx.SendAnimationConfigSave(0x0061);
-    m_lightfx.SendAnimationConfigPlay(0x0061);
-    m_lightfx.SendAnimationSetDefault(0x0061);
-    m_lightfx.SendAnimationPlay(0x0061);
+    m_lightfx.SendAnimationConfigSave(0x0000);
+    m_lightfx.SendAnimationConfigPlay(0x0000);
+    m_lightfx.SendAnimationSetDefault(0x0000);
+    m_lightfx.SendAnimationPlay(0x0000);
     m_lightfx.deviceRelease();
 }
 
