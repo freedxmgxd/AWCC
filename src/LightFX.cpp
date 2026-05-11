@@ -3,6 +3,7 @@
 #include <array>
 #include <cstdio>
 #include <cstring>
+#include <iomanip>
 #include <loguru.hpp>
 #include <vector>
 
@@ -115,14 +116,16 @@ void LightFX::m_deviceSend(std::span<const uint8_t> data) {
     std::memcpy(buffer.data(), data.data(),
                 std::min<size_t>(data.size(), buffer.size()));
     
-    std::string hexDump;
-    for (size_t i = 0; i < buffer.size(); i++) {
-        char hex[4];
-        snprintf(hex, sizeof(hex), "%02x", buffer[i]);
-        hexDump += hex;
-        if ((i + 1) % 8 == 0) hexDump += " ";
-    }
-    LOG_S(INFO) << "Sending USB packet (33 bytes): " << hexDump;
+    // Log first 6 bytes + rest as shortened format
+    LOG_S(INFO) << "USB packet: " 
+        << std::hex << std::setfill('0')
+        << std::setw(2) << (int)buffer[0] << " "
+        << std::setw(2) << (int)buffer[1] << " "
+        << std::setw(2) << (int)buffer[2] << " "
+        << std::setw(2) << (int)buffer[3] << " "
+        << std::setw(2) << (int)buffer[4] << " "
+        << std::setw(2) << (int)buffer[5] << " ...";
+    LOG_S(INFO) << "Packet size: 33 bytes" << std::dec;
 
     int ret = libusb_control_transfer(
         m_deviceHandle, 0x21, 9, 0x202, 0,
