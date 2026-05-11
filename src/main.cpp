@@ -315,6 +315,7 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, testMode);
+        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
@@ -345,6 +346,7 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, true);
+        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
@@ -376,6 +378,7 @@ int main(int argc, char *argv[]) {
         LOG_S(INFO) << "Initializing AcpiUtils Module";
         bool testMode = awcc::shouldRunTestMode(args);
         AcpiUtils acpiUtils(daemon, testMode);
+        acpiUtils.executeAcpiCommand(0x25, 0x01, 0x00, 0x00);
 
         effects.setZones(acpiUtils.getKeyboardZones());
 
